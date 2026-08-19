@@ -1,0 +1,24 @@
+{
+  "name": "@go-code-bot/pipeline-builder",
+  "version": "1.0.0",
+  "description": "Gabriel Operator pipeline-builder skill pack for Git-backed state machines",
+  "keywords": [
+    "gabriel-operator",
+    "pipeline",
+    "state-machine",
+    "xstate",
+    "workflow",
+    "skills"
+  ],
+  "license": "MIT",
+  "bin": {
+    "skills": "./cli.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/go-code-bot/pipeline-builder.git"
+  }
+}

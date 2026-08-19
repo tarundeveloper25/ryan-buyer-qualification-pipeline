@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "target": "pipeline_definition",
+  "pipeline": {
+    "id": "pl_2c40bbc4835c",
+    "name": "Buyer Qualification Pipeline",
+    "description": null,
+    "pageId": "0ec94bd1-83bc-4bdc-a529-1f62c0150453",
+    "collectionId": "coll_f1ff0e077761",
+    "runConcurrency": "multi"
+  },
+  "definitionFile": "assets/pipeline.json",
+  "tasksDir": "tasks",
+  "stages": [
+    {
+      "id": "intake",
+      "name": "Intake"
+    },
+    {
+      "id": "scored",
+      "name": "Scored"
+    },
+    {
+      "id": "drafted",
+      "name": "Drafted"
+    },
+    {
+      "id": "slots_ready",
+      "name": "Slots Ready"
+    }
+  ],
+  "columns": [],
+  "transitionIds": [
+    "score_buyer",
+    "draft_response",
+    "prepare_slots"
+  ]
+}

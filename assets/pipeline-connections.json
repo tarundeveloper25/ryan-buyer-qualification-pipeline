@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 2,
+  "commandId": "pl_2c40bbc4835c",
+  "trigger": "pl_2c40bbc4835c",
+  "label": "Buyer Qualification Pipeline",
+  "updatedAt": 1787133757790,
+  "nodes": [
+    {
+      "id": "pipeline:pl_2c40bbc4835c",
+      "kind": "execution",
+      "label": "Buyer Qualification Pipeline",
+      "description": "Pipeline state machine",
+      "meta": {
+        "executionType": "pipeline",
+        "pipelineId": "pl_2c40bbc4835c",
+        "collectionId": "coll_f1ff0e077761"
+      }
+    },
+    {
+      "id": "pipeline-stage:pl_2c40bbc4835c:intake",
+      "kind": "pipeline_stage",
+      "label": "Intake",
+      "description": "Buyer inquiry captured and summarized after approved Gmail read.",
+      "meta": {
+        "pipelineId": "pl_2c40bbc4835c",
+        "stageId": "intake",
+        "stageType": "initial",
+        "color": "#64748b"
+      }
+    },
+    {
+      "id": "pipeline-stage:pl_2c40bbc4835c:scored",
+      "kind": "pipeline_stage",
+      "label": "Scored",
+      "description": "Financing and target range checked; readiness score recorded.",
+      "meta": {
+        "pipelineId": "pl_2c40bbc4835c",
+        "stageId": "scored",
+        "stageType": "intermediate",
+        "color": "#2563eb"
+      }
+    },
+    {
+      "id": "pipeline-stage:pl_2c40bbc4835c:drafted",
+      "kind": "pipeline_stage",
+      "label": "Drafted",
+      "description": "Unsent response draft with exactly three next questions prepared.",
+      "meta": {
+        "pipelineId": "pl_2c40bbc4835c",
+        "stageId": "drafted",
+        "stageType": "intermediate",
+        "color": "#7c3aed"
+      }
+    },
+    {
+      "id": "pipeline-stage:pl_2c40bbc4835c:slots_ready",
+      "kind": "pipeline_stage",
+      "label": "Slots Ready",
+      "description": "Three unbooked 30-minute intro-call suggestions prepared.",
+      "meta": {
+        "pipelineId": "pl_2c40bbc4835c",
+        "stageId": "slots_ready",
+        "stageType": "terminal",
+        "color": "#16a34a"
+      }
+    },
+    {
+      "id": "collection:coll_f1ff0e077761",
+      "kind": "collection",
+      "label": "coll_f1ff0e077761",
+      "description": "Buyer Qualification Pipeline collection",
+      "meta": {
+        "collectionId": "coll_f1ff0e077761",
+        "pipelineId": "pl_2c40bbc4835c"
+      }
+    },
+    {
+      "id": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
+      "kind": "pipeline_transition",
+      "label": "Score buyer readiness",
+      "description": "Pipeline transition",
+      "meta": {
+        "pipelineId": "pl_2c40bbc4835c",
+        "transitionId": "score_buyer",
+        "trigger": "manual"
+      }
+    },
+    {
+      "id": "pipeline-transition:pl_2c40bbc4835c:draft_response",
+      "kind": "pipeline_transition",
+      "label": "Draft buyer response",
+      "description": "Pipeline transition",
+      "meta": {
+        "pipelineId": "pl_2c40bbc4835c",
+        "transitionId": "draft_response",
+        "trigger": "manual"
+      }
+    },
+    {
+      "id": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
+      "kind": "pipeline_transition",
+      "label": "Prepare intro call slots",
+      "description": "Pipeline transition",
+      "meta": {
+        "pipelineId": "pl_2c40bbc4835c",
+        "transitionId": "prepare_slots",
+        "trigger": "manual"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:pipeline:pl_2c40bbc4835c:route:pipeline-stage:pl_2c40bbc4835c:intake:1",
+      "source": "pipeline:pl_2c40bbc4835c",
+      "target": "pipeline-stage:pl_2c40bbc4835c:intake",
+      "relation": "route",
+      "label": "start"
+    },
+    {
+      "id": "edge:pipeline:pl_2c40bbc4835c:writes:collection:coll_f1ff0e077761:2",
+      "source": "pipeline:pl_2c40bbc4835c",
+      "target": "collection:coll_f1ff0e077761",
+      "relation": "writes"
+    },
+    {
+      "id": "edge:pipeline-stage:pl_2c40bbc4835c:intake:triggers:pipeline-transition:pl_2c40bbc4835c:score_buyer:3",
+      "source": "pipeline-stage:pl_2c40bbc4835c:intake",
+      "target": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
+      "relation": "triggers"
+    },
+    {
+      "id": "edge:pipeline-transition:pl_2c40bbc4835c:score_buyer:success:pipeline-stage:pl_2c40bbc4835c:scored:4",
+      "source": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
+      "target": "pipeline-stage:pl_2c40bbc4835c:scored",
+      "relation": "success"
+    },
+    {
+      "id": "edge:pipeline-transition:pl_2c40bbc4835c:score_buyer:failure:pipeline-stage:pl_2c40bbc4835c:intake:5",
+      "source": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
+      "target": "pipeline-stage:pl_2c40bbc4835c:intake",
+      "relation": "failure"
+    },
+    {
+      "id": "edge:pipeline-stage:pl_2c40bbc4835c:scored:triggers:pipeline-transition:pl_2c40bbc4835c:draft_response:6",
+      "source": "pipeline-stage:pl_2c40bbc4835c:scored",
+      "target": "pipeline-transition:pl_2c40bbc4835c:draft_response",
+      "relation": "triggers"
+    },
+    {
+      "id": "edge:pipeline-transition:pl_2c40bbc4835c:draft_response:success:pipeline-stage:pl_2c40bbc4835c:drafted:7",
+      "source": "pipeline-transition:pl_2c40bbc4835c:draft_response",
+      "target": "pipeline-stage:pl_2c40bbc4835c:drafted",
+      "relation": "success"
+    },
+    {
+      "id": "edge:pipeline-transition:pl_2c40bbc4835c:draft_response:failure:pipeline-stage:pl_2c40bbc4835c:scored:8",
+      "source": "pipeline-transition:pl_2c40bbc4835c:draft_response",
+      "target": "pipeline-stage:pl_2c40bbc4835c:scored",
+      "relation": "failure"
+    },
+    {
+      "id": "edge:pipeline-stage:pl_2c40bbc4835c:drafted:triggers:pipeline-transition:pl_2c40bbc4835c:prepare_slots:9",
+      "source": "pipeline-stage:pl_2c40bbc4835c:drafted",
+      "target": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
+      "relation": "triggers"
+    },
+    {
+      "id": "edge:pipeline-transition:pl_2c40bbc4835c:prepare_slots:success:pipeline-stage:pl_2c40bbc4835c:slots_ready:10",
+      "source": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
+      "target": "pipeline-stage:pl_2c40bbc4835c:slots_ready",
+      "relation": "success"
+    },
+    {
+      "id": "edge:pipeline-transition:pl_2c40bbc4835c:prepare_slots:failure:pipeline-stage:pl_2c40bbc4835c:drafted:11",
+      "source": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
+      "target": "pipeline-stage:pl_2c40bbc4835c:drafted",
+      "relation": "failure"
+    }
+  ],
+  "relatedTodoIds": []
+}
