@@ -3,7 +3,7 @@
   "commandId": "pl_2c40bbc4835c",
   "trigger": "pl_2c40bbc4835c",
   "label": "Buyer Qualification Pipeline",
-  "updatedAt": 1787133757790,
+  "updatedAt": 1787204768217,
   "nodes": [
     {
       "id": "pipeline:pl_2c40bbc4835c",
@@ -13,7 +13,7 @@
       "meta": {
         "executionType": "pipeline",
         "pipelineId": "pl_2c40bbc4835c",
-        "collectionId": "coll_f1ff0e077761"
+        "collectionId": "coll_a108fce9c816"
       }
     },
     {
@@ -65,12 +65,12 @@
       }
     },
     {
-      "id": "collection:coll_f1ff0e077761",
+      "id": "collection:coll_a108fce9c816",
       "kind": "collection",
-      "label": "coll_f1ff0e077761",
+      "label": "coll_a108fce9c816",
       "description": "Buyer Qualification Pipeline collection",
       "meta": {
-        "collectionId": "coll_f1ff0e077761",
+        "collectionId": "coll_a108fce9c816",
         "pipelineId": "pl_2c40bbc4835c"
       }
     },
@@ -117,9 +117,9 @@
       "label": "start"
     },
     {
-      "id": "edge:pipeline:pl_2c40bbc4835c:writes:collection:coll_f1ff0e077761:2",
+      "id": "edge:pipeline:pl_2c40bbc4835c:writes:collection:coll_a108fce9c816:2",
       "source": "pipeline:pl_2c40bbc4835c",
-      "target": "collection:coll_f1ff0e077761",
+      "target": "collection:coll_a108fce9c816",
       "relation": "writes"
     },
     {

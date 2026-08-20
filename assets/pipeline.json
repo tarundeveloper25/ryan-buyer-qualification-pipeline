@@ -8,7 +8,7 @@
     "userId": "1787120839191",
     "name": "Buyer Qualification Pipeline",
     "description": null,
-    "collectionId": "coll_f1ff0e077761",
+    "collectionId": "coll_a108fce9c816",
     "stages": [
       {
         "id": "intake",
@@ -235,7 +235,7 @@
     "isPublic": true,
     "isDeleted": false,
     "createdAt": "2026-08-19T10:02:35.128Z",
-    "updatedAt": "2026-08-19T10:02:37.790Z"
+    "updatedAt": "2026-08-20T05:46:08.217Z"
   },
   "commitMessage": "Initial migration from pipeline wizard"
 }
