@@ -36,19 +36,19 @@
     ],
     "transitions": [
       {
-        "id":"score_buyer","name":"Score buyer fit","fromStageId":"intake","toStageId":"scored","trigger":"manual",
+        "id":"score_buyer","name":"Score buyer fit","fromStageId":"intake","toStageId":"scored","trigger":"manual","automation":{"autoFireOnEntry":false},
         "success":{"advanceToStageId":"scored","persistMode":"shared_patch"},
         "failure":{"advanceToStageId":"intake","persistMode":"shared_patch"},
         "failureStageId":"intake","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       },
       {
-        "id":"draft_response","name":"Draft buyer response","fromStageId":"scored","toStageId":"drafted","trigger":"manual",
+        "id":"draft_response","name":"Draft buyer response","fromStageId":"scored","toStageId":"drafted","trigger":"manual","automation":{"autoFireOnEntry":false},
         "success":{"advanceToStageId":"drafted","persistMode":"shared_patch"},
         "failure":{"advanceToStageId":"scored","persistMode":"shared_patch"},
         "failureStageId":"scored","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       },
       {
-        "id":"prepare_slots","name":"Prepare intro call slots","fromStageId":"drafted","toStageId":"slots_ready","trigger":"manual",
+        "id":"prepare_slots","name":"Prepare intro call slots","fromStageId":"drafted","toStageId":"slots_ready","trigger":"manual","automation":{"autoFireOnEntry":false},
         "success":{"advanceToStageId":"slots_ready","persistMode":"shared_patch"},
         "failure":{"advanceToStageId":"drafted","persistMode":"shared_patch"},
         "failureStageId":"drafted","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
