@@ -42,6 +42,14 @@ New and cross-environment pipeline assets must use stable resource keys:
 - A Persona bundle manifest must pin the exact Pipeline commit `revision` and SHA-256 `definitionFingerprint` of `assets/pipeline.json`; a moving branch without a matching fingerprint is invalid.
 - Legacy schema v1 is same-environment compatibility only; never copy it across environments and never generate new v1 exports.
 
+Root `gabriel.workspace.json` declares `assets/pipeline.json` and its required validator.
+Keep the marker and script in every new scaffold. In a Persona workspace, commit and push
+this child first; parent publish checks the configured origin and declared branch before
+pinning it. The registry contains exactly one shared Pipeline.
+Unmarked legacy children fall back to a conventional validator with a prominent warning;
+new marked children fail if required validator files are missing. Parent `prune` is
+non-destructive: it unlinks validated Git metadata and preserves the physical checkout.
+
 ## Git-backed pipeline repositories
 
 When this skill is materialized as a Git repository for one pipeline, the repo

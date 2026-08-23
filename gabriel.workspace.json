@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "scaffold": "pipeline-builder",
+  "kind": "pipeline",
+  "validators": [
+    {
+      "runner": "node",
+      "script": "scripts/validate-pipeline.js",
+      "assetPath": "assets/pipeline.json",
+      "mode": "required"
+    }
+  ]
+}

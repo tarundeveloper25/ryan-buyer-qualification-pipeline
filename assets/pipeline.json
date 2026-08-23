@@ -1,61 +1,503 @@
 {
-  "schemaVersion": 2,
-  "resourceKey": "pipeline.ryan.buyer-qualification-pipeline",
-  "storage": {
-    "listRef": {"kind":"list","resourceKey":"list.ryan.buyer-qualification-cases"}
-  },
+  "schemaVersion": 1,
+  "pageId": "0ec94bd1-83bc-4bdc-a529-1f62c0150453",
+  "pipelineId": "pl_2c40bbc4835c",
   "pipeline": {
+    "id": "pl_2c40bbc4835c",
+    "pageId": "0ec94bd1-83bc-4bdc-a529-1f62c0150453",
+    "userId": "1787120839191",
     "name": "Buyer Qualification Pipeline",
     "description": "Approval-gated buyer qualification from intake through scored draft and unbooked call suggestions.",
-    "columns": [
-      {"id":"col_case_id","key":"case_id","label":"Case ID","type":"text","required":true,"order":0},
-      {"id":"col_buyer_name","key":"buyer_name","label":"Buyer Name","type":"text","required":true,"order":1},
-      {"id":"col_email","key":"email","label":"Email","type":"text","required":true,"order":2},
-      {"id":"col_inquiry_summary","key":"inquiry_summary","label":"Inquiry Summary","type":"text","required":true,"order":3},
-      {"id":"col_desired","key":"desired","label":"Desired Property","type":"text","required":true,"order":4},
-      {"id":"col_budget_min_usd","key":"budget_min_usd","label":"Budget Minimum USD","type":"number","required":true,"order":5},
-      {"id":"col_budget_max_usd","key":"budget_max_usd","label":"Budget Maximum USD","type":"number","required":true,"order":6},
-      {"id":"col_financing","key":"financing","label":"Financing","type":"text","required":true,"order":7},
-      {"id":"col_down_payment_usd","key":"down_payment_usd","label":"Down Payment USD","type":"number","required":false,"order":8},
-      {"id":"col_monthly_housing_max_usd","key":"monthly_housing_max_usd","label":"Monthly Housing Maximum USD","type":"number","required":false,"order":9},
-      {"id":"col_timeline","key":"timeline","label":"Timeline","type":"text","required":true,"order":10},
-      {"id":"col_occupancy","key":"occupancy","label":"Occupancy","type":"text","required":false,"order":11},
-      {"id":"col_commute_max_min","key":"commute_max_min","label":"Maximum Commute Minutes","type":"number","required":false,"order":12},
-      {"id":"col_fit_score_target","key":"fit_score_target","label":"Fit Score Target","type":"number","required":false,"order":13},
-      {"id":"col_fit_band","key":"fit_band","label":"Fit Band","type":"select","required":false,"options":["strong","developing","needs_discovery"],"order":14},
-      {"id":"col_next_questions","key":"next_questions","label":"Next Questions","type":"json","required":false,"order":15},
-      {"id":"col_draft_response","key":"draft_response","label":"Draft Response","type":"text","required":false,"order":16},
-      {"id":"col_suggested_slots","key":"suggested_slots","label":"Suggested Call Slots","type":"json","required":false,"order":17},
-      {"id":"col_pipeline_stage","key":"pipeline_stage","label":"Pipeline Stage","type":"select","required":true,"options":["intake","scored","drafted","slots_ready"],"order":18}
-    ],
+    "collectionId": "coll_a108fce9c816",
     "stages": [
-      {"id":"intake","name":"Intake","type":"initial","triggerKind":"manual","description":"Buyer inquiry captured after the approved Gmail read or deterministic mock fallback.","colorToken":"#64748b","order":0},
-      {"id":"scored","name":"Scored","type":"intermediate","triggerKind":"manual","description":"Financing, budget, and comparable values checked; fit score recorded.","colorToken":"#2563eb","order":1},
-      {"id":"drafted","name":"Drafted","type":"intermediate","triggerKind":"manual","description":"Unsent response draft with exactly three required questions prepared.","colorToken":"#7c3aed","order":2},
-      {"id":"slots_ready","name":"Slots Ready","type":"terminal","triggerKind":"manual","description":"Three unbooked intro-call suggestions prepared.","colorToken":"#16a34a","order":3}
+      {
+        "id": "intake",
+        "name": "Intake",
+        "type": "initial",
+        "triggerKind": "manual",
+        "description": "Buyer inquiry captured after the approved Gmail read or deterministic mock fallback.",
+        "workflowEndpointId": null,
+        "reactiveConfig": null,
+        "scheduledConfig": null,
+        "dataChangeConfig": null,
+        "colorToken": "#64748b",
+        "icon": null,
+        "order": 0,
+        "transition": null,
+        "outputMapping": null,
+        "outputMode": null,
+        "outputArrayKey": null,
+        "upsertKey": null
+      },
+      {
+        "id": "scored",
+        "name": "Scored",
+        "type": "intermediate",
+        "triggerKind": "manual",
+        "description": "Financing, budget, and comparable values checked; fit score recorded.",
+        "workflowEndpointId": null,
+        "reactiveConfig": null,
+        "scheduledConfig": null,
+        "dataChangeConfig": null,
+        "colorToken": "#2563eb",
+        "icon": null,
+        "order": 1,
+        "transition": null,
+        "outputMapping": null,
+        "outputMode": null,
+        "outputArrayKey": null,
+        "upsertKey": null
+      },
+      {
+        "id": "drafted",
+        "name": "Drafted",
+        "type": "intermediate",
+        "triggerKind": "manual",
+        "description": "Unsent response draft with exactly three required questions prepared.",
+        "workflowEndpointId": null,
+        "reactiveConfig": null,
+        "scheduledConfig": null,
+        "dataChangeConfig": null,
+        "colorToken": "#7c3aed",
+        "icon": null,
+        "order": 2,
+        "transition": null,
+        "outputMapping": null,
+        "outputMode": null,
+        "outputArrayKey": null,
+        "upsertKey": null
+      },
+      {
+        "id": "slots_ready",
+        "name": "Slots Ready",
+        "type": "terminal",
+        "triggerKind": "manual",
+        "description": "Three unbooked intro-call suggestions prepared.",
+        "workflowEndpointId": null,
+        "reactiveConfig": null,
+        "scheduledConfig": null,
+        "dataChangeConfig": null,
+        "colorToken": "#16a34a",
+        "icon": null,
+        "order": 3,
+        "transition": null,
+        "outputMapping": null,
+        "outputMode": null,
+        "outputArrayKey": null,
+        "upsertKey": null
+      }
     ],
     "transitions": [
       {
-        "id":"score_buyer","name":"Score buyer fit","fromStageId":"intake","toStageId":"scored","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
-        "success":{"advanceToStageId":"scored","persistMode":"shared_patch"},
-        "failure":{"advanceToStageId":"intake","persistMode":"shared_patch"},
-        "failureStageId":"intake","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
+        "id": "score_buyer",
+        "name": "Score buyer fit",
+        "fromStageId": "intake",
+        "toStageId": "scored",
+        "workflowEndpointId": null,
+        "acquisition": null,
+        "postProcessors": null,
+        "inputBindings": null,
+        "trigger": "manual",
+        "automation": {
+          "autoFireOnEntry": false,
+          "autoAdvanceWhenWorkflowless": false
+        },
+        "approvalGuard": null,
+        "success": {
+          "advanceToStageId": "scored",
+          "guardText": null,
+          "guardAst": null,
+          "fieldMappings": [
+            {
+              "targetField": "pipeline_stage",
+              "sourcePath": "pipeline_stage",
+              "required": false,
+              "defaultValue": "scored"
+            }
+          ],
+          "persistMode": "shared_patch",
+          "arrayKey": null,
+          "correlation": null,
+          "effects": null,
+          "persistListName": null
+        },
+        "failure": {
+          "advanceToStageId": "intake",
+          "guardText": null,
+          "guardAst": null,
+          "fieldMappings": null,
+          "persistMode": "shared_patch",
+          "arrayKey": null,
+          "correlation": null,
+          "effects": null,
+          "persistListName": null
+        },
+        "failureRoutes": null,
+        "failureStageId": "intake",
+        "guard": null,
+        "fieldMappings": [
+          {
+            "targetField": "pipeline_stage",
+            "sourcePath": "pipeline_stage",
+            "required": false,
+            "defaultValue": "scored"
+          }
+        ],
+        "outputMode": "single",
+        "outputArrayKey": null,
+        "selectionMode": "all_in_stage",
+        "batchMode": "none",
+        "manualLabel": null,
+        "legacyRouteKey": null,
+        "upsertKey": null
       },
       {
-        "id":"draft_response","name":"Draft buyer response","fromStageId":"scored","toStageId":"drafted","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
-        "success":{"advanceToStageId":"drafted","persistMode":"shared_patch"},
-        "failure":{"advanceToStageId":"scored","persistMode":"shared_patch"},
-        "failureStageId":"scored","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
+        "id": "draft_response",
+        "name": "Draft buyer response",
+        "fromStageId": "scored",
+        "toStageId": "drafted",
+        "workflowEndpointId": null,
+        "acquisition": null,
+        "postProcessors": null,
+        "inputBindings": null,
+        "trigger": "manual",
+        "automation": {
+          "autoFireOnEntry": false,
+          "autoAdvanceWhenWorkflowless": false
+        },
+        "approvalGuard": null,
+        "success": {
+          "advanceToStageId": "drafted",
+          "guardText": null,
+          "guardAst": null,
+          "fieldMappings": [
+            {
+              "targetField": "pipeline_stage",
+              "sourcePath": "pipeline_stage",
+              "required": false,
+              "defaultValue": "drafted"
+            },
+            {
+              "targetField": "next_questions",
+              "sourcePath": "next_questions",
+              "required": false,
+              "defaultValue": "[\"Are District 12 schools a firm requirement, or would you consider nearby school zones?\",\"Is the 30-minute downtown commute limit required at peak travel time?\",\"Will you complete the purchase with conventional financing, or are you considering an all-cash close?\"]"
+            },
+            {
+              "targetField": "draft_response",
+              "sourcePath": "draft_response",
+              "required": false,
+              "defaultValue": "Draft — Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."
+            }
+          ],
+          "persistMode": "shared_patch",
+          "arrayKey": null,
+          "correlation": null,
+          "effects": null,
+          "persistListName": null
+        },
+        "failure": {
+          "advanceToStageId": "scored",
+          "guardText": null,
+          "guardAst": null,
+          "fieldMappings": null,
+          "persistMode": "shared_patch",
+          "arrayKey": null,
+          "correlation": null,
+          "effects": null,
+          "persistListName": null
+        },
+        "failureRoutes": null,
+        "failureStageId": "scored",
+        "guard": null,
+        "fieldMappings": [
+          {
+            "targetField": "pipeline_stage",
+            "sourcePath": "pipeline_stage",
+            "required": false,
+            "defaultValue": "drafted"
+          },
+          {
+            "targetField": "next_questions",
+            "sourcePath": "next_questions",
+            "required": false,
+            "defaultValue": "[\"Are District 12 schools a firm requirement, or would you consider nearby school zones?\",\"Is the 30-minute downtown commute limit required at peak travel time?\",\"Will you complete the purchase with conventional financing, or are you considering an all-cash close?\"]"
+          },
+          {
+            "targetField": "draft_response",
+            "sourcePath": "draft_response",
+            "required": false,
+            "defaultValue": "Draft — Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."
+          }
+        ],
+        "outputMode": "single",
+        "outputArrayKey": null,
+        "selectionMode": "all_in_stage",
+        "batchMode": "none",
+        "manualLabel": null,
+        "legacyRouteKey": null,
+        "upsertKey": null
       },
       {
-        "id":"prepare_slots","name":"Prepare intro call slots","fromStageId":"drafted","toStageId":"slots_ready","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
-        "success":{"advanceToStageId":"slots_ready","persistMode":"shared_patch"},
-        "failure":{"advanceToStageId":"drafted","persistMode":"shared_patch"},
-        "failureStageId":"drafted","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
+        "id": "prepare_slots",
+        "name": "Prepare intro call slots",
+        "fromStageId": "drafted",
+        "toStageId": "slots_ready",
+        "workflowEndpointId": null,
+        "acquisition": null,
+        "postProcessors": null,
+        "inputBindings": null,
+        "trigger": "manual",
+        "automation": {
+          "autoFireOnEntry": false,
+          "autoAdvanceWhenWorkflowless": false
+        },
+        "approvalGuard": null,
+        "success": {
+          "advanceToStageId": "slots_ready",
+          "guardText": null,
+          "guardAst": null,
+          "fieldMappings": [
+            {
+              "targetField": "pipeline_stage",
+              "sourcePath": "pipeline_stage",
+              "required": false,
+              "defaultValue": "slots_ready"
+            },
+            {
+              "targetField": "suggested_slots",
+              "sourcePath": "suggested_slots",
+              "required": false,
+              "defaultValue": "[\"2026-09-08 17:30 PT\",\"2026-09-09 18:00 PT\",\"2026-09-10 12:00 PT\"]"
+            }
+          ],
+          "persistMode": "shared_patch",
+          "arrayKey": null,
+          "correlation": null,
+          "effects": null,
+          "persistListName": null
+        },
+        "failure": {
+          "advanceToStageId": "drafted",
+          "guardText": null,
+          "guardAst": null,
+          "fieldMappings": null,
+          "persistMode": "shared_patch",
+          "arrayKey": null,
+          "correlation": null,
+          "effects": null,
+          "persistListName": null
+        },
+        "failureRoutes": null,
+        "failureStageId": "drafted",
+        "guard": null,
+        "fieldMappings": [
+          {
+            "targetField": "pipeline_stage",
+            "sourcePath": "pipeline_stage",
+            "required": false,
+            "defaultValue": "slots_ready"
+          },
+          {
+            "targetField": "suggested_slots",
+            "sourcePath": "suggested_slots",
+            "required": false,
+            "defaultValue": "[\"2026-09-08 17:30 PT\",\"2026-09-09 18:00 PT\",\"2026-09-10 12:00 PT\"]"
+          }
+        ],
+        "outputMode": "single",
+        "outputArrayKey": null,
+        "selectionMode": "all_in_stage",
+        "batchMode": "none",
+        "manualLabel": null,
+        "legacyRouteKey": null,
+        "upsertKey": null
       }
     ],
     "acquisitionRecipes": [],
-    "runConcurrency": "multi"
+    "columns": [
+      {
+        "id": "col_case_id",
+        "key": "case_id",
+        "label": "Case ID",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "order": 0
+      },
+      {
+        "id": "col_buyer_name",
+        "key": "buyer_name",
+        "label": "Buyer Name",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "order": 1
+      },
+      {
+        "id": "col_email",
+        "key": "email",
+        "label": "Email",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "order": 2
+      },
+      {
+        "id": "col_inquiry_summary",
+        "key": "inquiry_summary",
+        "label": "Inquiry Summary",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "order": 3
+      },
+      {
+        "id": "col_desired",
+        "key": "desired",
+        "label": "Desired Property",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "order": 4
+      },
+      {
+        "id": "col_budget_min_usd",
+        "key": "budget_min_usd",
+        "label": "Budget Minimum USD",
+        "type": "number",
+        "required": true,
+        "options": null,
+        "order": 5
+      },
+      {
+        "id": "col_budget_max_usd",
+        "key": "budget_max_usd",
+        "label": "Budget Maximum USD",
+        "type": "number",
+        "required": true,
+        "options": null,
+        "order": 6
+      },
+      {
+        "id": "col_financing",
+        "key": "financing",
+        "label": "Financing",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "order": 7
+      },
+      {
+        "id": "col_down_payment_usd",
+        "key": "down_payment_usd",
+        "label": "Down Payment USD",
+        "type": "number",
+        "required": false,
+        "options": null,
+        "order": 8
+      },
+      {
+        "id": "col_monthly_housing_max_usd",
+        "key": "monthly_housing_max_usd",
+        "label": "Monthly Housing Maximum USD",
+        "type": "number",
+        "required": false,
+        "options": null,
+        "order": 9
+      },
+      {
+        "id": "col_timeline",
+        "key": "timeline",
+        "label": "Timeline",
+        "type": "text",
+        "required": true,
+        "options": null,
+        "order": 10
+      },
+      {
+        "id": "col_occupancy",
+        "key": "occupancy",
+        "label": "Occupancy",
+        "type": "text",
+        "required": false,
+        "options": null,
+        "order": 11
+      },
+      {
+        "id": "col_commute_max_min",
+        "key": "commute_max_min",
+        "label": "Maximum Commute Minutes",
+        "type": "number",
+        "required": false,
+        "options": null,
+        "order": 12
+      },
+      {
+        "id": "col_fit_score_target",
+        "key": "fit_score_target",
+        "label": "Fit Score Target",
+        "type": "number",
+        "required": false,
+        "options": null,
+        "order": 13
+      },
+      {
+        "id": "col_fit_band",
+        "key": "fit_band",
+        "label": "Fit Band",
+        "type": "select",
+        "required": false,
+        "options": [],
+        "order": 14
+      },
+      {
+        "id": "col_next_questions",
+        "key": "next_questions",
+        "label": "Next Questions",
+        "type": "json",
+        "required": false,
+        "options": null,
+        "order": 15
+      },
+      {
+        "id": "col_draft_response",
+        "key": "draft_response",
+        "label": "Draft Response",
+        "type": "text",
+        "required": false,
+        "options": null,
+        "order": 16
+      },
+      {
+        "id": "col_suggested_slots",
+        "key": "suggested_slots",
+        "label": "Suggested Call Slots",
+        "type": "json",
+        "required": false,
+        "options": null,
+        "order": 17
+      },
+      {
+        "id": "col_pipeline_stage",
+        "key": "pipeline_stage",
+        "label": "Pipeline Stage",
+        "type": "select",
+        "required": true,
+        "options": [],
+        "order": 18
+      }
+    ],
+    "runConcurrency": "multi",
+    "projectionRepairVersion": 1,
+    "version": 89,
+    "isPublic": true,
+    "isDeleted": false,
+    "createdAt": "2026-08-19T10:02:35.128Z",
+    "updatedAt": "2026-08-23T16:44:59.397Z",
+    "child": null,
+    "childPipelines": null,
+    "existingCasePolicies": []
   },
-  "commitMessage": "Repair portable buyer qualification pipeline"
+  "commitMessage": "Initial migration from pipeline wizard"
 }

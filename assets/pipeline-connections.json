@@ -3,13 +3,13 @@
   "commandId": "pl_2c40bbc4835c",
   "trigger": "pl_2c40bbc4835c",
   "label": "Buyer Qualification Pipeline",
-  "updatedAt": 1787204768217,
+  "updatedAt": 1787503499397,
   "nodes": [
     {
       "id": "pipeline:pl_2c40bbc4835c",
       "kind": "execution",
       "label": "Buyer Qualification Pipeline",
-      "description": "Pipeline state machine",
+      "description": "Approval-gated buyer qualification from intake through scored draft and unbooked call suggestions.",
       "meta": {
         "executionType": "pipeline",
         "pipelineId": "pl_2c40bbc4835c",
@@ -20,7 +20,7 @@
       "id": "pipeline-stage:pl_2c40bbc4835c:intake",
       "kind": "pipeline_stage",
       "label": "Intake",
-      "description": "Buyer inquiry captured and summarized after approved Gmail read.",
+      "description": "Buyer inquiry captured after the approved Gmail read or deterministic mock fallback.",
       "meta": {
         "pipelineId": "pl_2c40bbc4835c",
         "stageId": "intake",
@@ -32,7 +32,7 @@
       "id": "pipeline-stage:pl_2c40bbc4835c:scored",
       "kind": "pipeline_stage",
       "label": "Scored",
-      "description": "Financing and target range checked; readiness score recorded.",
+      "description": "Financing, budget, and comparable values checked; fit score recorded.",
       "meta": {
         "pipelineId": "pl_2c40bbc4835c",
         "stageId": "scored",
@@ -44,7 +44,7 @@
       "id": "pipeline-stage:pl_2c40bbc4835c:drafted",
       "kind": "pipeline_stage",
       "label": "Drafted",
-      "description": "Unsent response draft with exactly three next questions prepared.",
+      "description": "Unsent response draft with exactly three required questions prepared.",
       "meta": {
         "pipelineId": "pl_2c40bbc4835c",
         "stageId": "drafted",
@@ -56,7 +56,7 @@
       "id": "pipeline-stage:pl_2c40bbc4835c:slots_ready",
       "kind": "pipeline_stage",
       "label": "Slots Ready",
-      "description": "Three unbooked 30-minute intro-call suggestions prepared.",
+      "description": "Three unbooked intro-call suggestions prepared.",
       "meta": {
         "pipelineId": "pl_2c40bbc4835c",
         "stageId": "slots_ready",
@@ -77,7 +77,7 @@
     {
       "id": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
       "kind": "pipeline_transition",
-      "label": "Score buyer readiness",
+      "label": "Score buyer fit",
       "description": "Pipeline transition",
       "meta": {
         "pipelineId": "pl_2c40bbc4835c",

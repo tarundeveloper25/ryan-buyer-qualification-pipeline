@@ -4,7 +4,7 @@
   "pipeline": {
     "id": "pl_2c40bbc4835c",
     "name": "Buyer Qualification Pipeline",
-    "description": null,
+    "description": "Approval-gated buyer qualification from intake through scored draft and unbooked call suggestions.",
     "pageId": "0ec94bd1-83bc-4bdc-a529-1f62c0150453",
     "collectionId": "coll_a108fce9c816",
     "runConcurrency": "multi"
@@ -29,7 +29,122 @@
       "name": "Slots Ready"
     }
   ],
-  "columns": [],
+  "columns": [
+    {
+      "key": "case_id",
+      "label": "Case ID",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "buyer_name",
+      "label": "Buyer Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "email",
+      "label": "Email",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "inquiry_summary",
+      "label": "Inquiry Summary",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "desired",
+      "label": "Desired Property",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "budget_min_usd",
+      "label": "Budget Minimum USD",
+      "type": "number",
+      "required": true
+    },
+    {
+      "key": "budget_max_usd",
+      "label": "Budget Maximum USD",
+      "type": "number",
+      "required": true
+    },
+    {
+      "key": "financing",
+      "label": "Financing",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "down_payment_usd",
+      "label": "Down Payment USD",
+      "type": "number",
+      "required": false
+    },
+    {
+      "key": "monthly_housing_max_usd",
+      "label": "Monthly Housing Maximum USD",
+      "type": "number",
+      "required": false
+    },
+    {
+      "key": "timeline",
+      "label": "Timeline",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "occupancy",
+      "label": "Occupancy",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "commute_max_min",
+      "label": "Maximum Commute Minutes",
+      "type": "number",
+      "required": false
+    },
+    {
+      "key": "fit_score_target",
+      "label": "Fit Score Target",
+      "type": "number",
+      "required": false
+    },
+    {
+      "key": "fit_band",
+      "label": "Fit Band",
+      "type": "select",
+      "required": false
+    },
+    {
+      "key": "next_questions",
+      "label": "Next Questions",
+      "type": "json",
+      "required": false
+    },
+    {
+      "key": "draft_response",
+      "label": "Draft Response",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "suggested_slots",
+      "label": "Suggested Call Slots",
+      "type": "json",
+      "required": false
+    },
+    {
+      "key": "pipeline_stage",
+      "label": "Pipeline Stage",
+      "type": "select",
+      "required": true
+    }
+  ],
   "transitionIds": [
     "score_buyer",
     "draft_response",

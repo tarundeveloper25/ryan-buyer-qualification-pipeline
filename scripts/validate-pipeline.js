@@ -5,6 +5,20 @@ function fail(message) {
   throw new Error(message);
 }
 
+const FORBIDDEN_PORTABLE_KEYS = new Set(['appId', 'endpointId', 'actionId', 'pageId', 'userId', 'pipelineId', 'listId', 'collectionId']);
+
+function validateNoLocalIds(value, pathLabel = '$') {
+  if (Array.isArray(value)) {
+    value.forEach((child, index) => validateNoLocalIds(child, `${pathLabel}[${index}]`));
+    return;
+  }
+  if (!value || typeof value !== 'object') return;
+  for (const [key, child] of Object.entries(value)) {
+    if (FORBIDDEN_PORTABLE_KEYS.has(key)) fail(`${pathLabel}.${key} is environment-local`);
+    validateNoLocalIds(child, `${pathLabel}.${key}`);
+  }
+}
+
 function assertNoDuplicates(values, label) {
   const seen = new Set();
   for (const value of values) {
@@ -30,6 +44,7 @@ const ALLOWED_GUARD_OPERATORS = new Set(['=', '!=', '>', '>=', '<', '<=', 'conta
 const ALLOWED_PERSIST_MODES = new Set(['shared_patch', 'per_record_match', 'create_or_upsert', 'replace']);
 const ALLOWED_EFFECT_OPERATIONS = new Set(['create', 'upsert', 'patch', 'create_or_upsert']);
 const ALLOWED_EFFECT_DISPATCH = new Set(['none', 'run_target_transition']);
+const ALLOWED_COLUMN_TYPES = new Set(['text', 'number', 'boolean', 'date', 'select', 'json']);
 
 function validateGuardAst(ast, columnKeys, label) {
   if (!ast) return;
@@ -159,10 +174,15 @@ function validate(filePath) {
   const schemaVersion = Number(parsed.schemaVersion);
   if (schemaVersion === 2) {
     if (!parsed.resourceKey) fail('resourceKey is required for schemaVersion 2');
+    if (!parsed.storage || parsed.storage.listRef?.kind !== 'list' || !String(parsed.storage.listRef?.resourceKey || '').trim()) {
+      fail('storage.listRef must be a portable list reference');
+    }
     if (!parsed.pipeline || typeof parsed.pipeline !== 'object') fail('pipeline object is required');
     if (!parsed.pipeline.name) fail('pipeline.name is required');
     if (!Array.isArray(parsed.pipeline.columns)) fail('pipeline.columns must be an array');
     if (!Array.isArray(parsed.pipeline.stages)) fail('pipeline.stages must be an array');
+    if (!Array.isArray(parsed.pipeline.transitions)) fail('pipeline.transitions must be an array');
+    validateNoLocalIds(parsed);
   } else if (schemaVersion !== 1) {
     fail('schemaVersion must be 1 or 2');
   } else {
@@ -185,6 +205,24 @@ function validate(filePath) {
   assertNoDuplicates(columns.map((column) => column.key || ''), 'column key');
   assertNoDuplicates(stages.map((stage) => stage.id || ''), 'stage id');
   assertNoDuplicates(transitions.map((transition) => transition.id || ''), 'transition id');
+
+  for (const column of columns) {
+    if (!String(column.key || '').trim()) fail('Every pipeline column requires a key');
+    if (!String(column.label || '').trim()) fail(`Column ${column.key} requires a label`);
+    const type = String(column.type || 'text').toLowerCase();
+    if (!ALLOWED_COLUMN_TYPES.has(type)) fail(`Column ${column.key} has invalid type ${column.type}`);
+    if (type === 'select' && column.options !== undefined && !Array.isArray(column.options)) {
+      fail(`Column ${column.key} options must be an array`);
+    }
+  }
+  for (const stage of stages) {
+    if (!String(stage.id || '').trim() || !String(stage.name || '').trim()) {
+      fail('Every pipeline stage requires an id and name');
+    }
+  }
+  for (const transition of transitions) {
+    if (!String(transition.id || '').trim()) fail('Every pipeline transition requires an id');
+  }
 
   const existingCasePolicies = Array.isArray(parsed.pipeline.existingCasePolicies)
     ? parsed.pipeline.existingCasePolicies
