@@ -40,7 +40,7 @@
         "success":{"advanceToStageId":"scored","persistMode":"shared_patch","fieldMappings":[
           {"targetField":"pipeline_stage","sourcePath":"pipeline_stage","defaultValue":"scored"}
         ]},
-        "failure":{"advanceToStageId":"intake","persistMode":"shared_patch"},
+        "failure":{"advanceToStageId":"intake","persistMode":"shared_patch","fieldMappings":[]},
         "failureStageId":"intake","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       },
       {
@@ -50,7 +50,7 @@
           {"targetField":"next_questions","sourcePath":"next_questions","defaultValue":"[\"Are District 12 schools a firm requirement, or would you consider nearby school zones?\",\"Is the 30-minute downtown commute limit required at peak travel time?\",\"Will you complete the purchase with conventional financing, or are you considering an all-cash close?\"]"},
           {"targetField":"draft_response","sourcePath":"draft_response","defaultValue":"Draft — Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."}
         ]},
-        "failure":{"advanceToStageId":"scored","persistMode":"shared_patch"},
+        "failure":{"advanceToStageId":"scored","persistMode":"shared_patch","fieldMappings":[]},
         "failureStageId":"scored","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       },
       {
@@ -59,7 +59,7 @@
           {"targetField":"pipeline_stage","sourcePath":"pipeline_stage","defaultValue":"slots_ready"},
           {"targetField":"suggested_slots","sourcePath":"suggested_slots","defaultValue":"[\"2026-09-08 17:30 PT\",\"2026-09-09 18:00 PT\",\"2026-09-10 12:00 PT\"]"}
         ]},
-        "failure":{"advanceToStageId":"drafted","persistMode":"shared_patch"},
+        "failure":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[]},
         "failureStageId":"drafted","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       }
     ],
