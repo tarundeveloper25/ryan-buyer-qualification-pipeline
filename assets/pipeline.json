@@ -54,7 +54,14 @@
         "failureStageId":"scored","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       },
       {
-        "id":"prepare_slots","name":"Prepare intro call slots","fromStageId":"drafted","toStageId":"slots_ready","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false,"requireHumanConfirmation":true},
+        "id":"propose_slots","name":"Propose intro call slots","fromStageId":"drafted","toStageId":"drafted","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
+        "success":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[
+          {"targetField":"suggested_slots","sourcePath":"suggested_slots","defaultValue":"[\"2026-09-08 17:30 PT\",\"2026-09-09 18:00 PT\",\"2026-09-10 12:00 PT\"]"}
+        ]},
+        "failure":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[]}
+      },
+      {
+        "id":"prepare_slots","name":"Prepare intro call slots","fromStageId":"drafted","toStageId":"slots_ready","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
         "success":{"advanceToStageId":"slots_ready","persistMode":"shared_patch","fieldMappings":[
           {"targetField":"pipeline_stage","sourcePath":"pipeline_stage","defaultValue":"slots_ready"},
           {"targetField":"suggested_slots","sourcePath":"suggested_slots","defaultValue":"[\"2026-09-08 17:30 PT\",\"2026-09-09 18:00 PT\",\"2026-09-10 12:00 PT\"]"}
