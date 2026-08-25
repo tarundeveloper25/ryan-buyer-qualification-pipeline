@@ -61,6 +61,13 @@
         ]},
         "failure":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[]},
         "failureStageId":"drafted","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
+      },
+      {
+        "id":"revise_slots","name":"Revise suggested slots","fromStageId":"drafted","toStageId":"drafted","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
+        "success":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[
+          {"targetField":"suggested_slots","sourcePath":"suggested_slots","defaultValue":"[\"2026-09-08 17:30 PT\",\"2026-09-09 18:00 PT\",\"2026-09-10 12:00 PT\"]"}
+        ]},
+        "failure":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[]}
       }
     ],
     "acquisitionRecipes": [],
