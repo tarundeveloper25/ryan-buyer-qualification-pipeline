@@ -36,17 +36,28 @@
     ],
     "transitions": [
       {
-        "id":"score_buyer","name":"Score buyer fit","fromStageId":"intake","toStageId":"scored","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
+        "id":"score_buyer","name":"Score buyer fit","fromStageId":"intake","toStageId":"scored","trigger":"manual","workflowEndpointId":"1207947d-6f00-45b2-823c-e88ab22e741c","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
         "success":{"advanceToStageId":"scored","persistMode":"shared_patch","fieldMappings":[
-          {"targetField":"pipeline_stage","sourcePath":"pipeline_stage","defaultValue":"scored"}
+          {"targetField":"pipeline_stage","sourcePath":"pipeline_stage","defaultValue":"scored"},
+          {"targetField":"inquiry_summary","sourcePath":"inquiry_summary","defaultValue":"Maya Chen is relocating for a September start, is conventionally pre-approved to $560,000 with 20% down, seeks a 3 bed / 2 bath in Westbrook with District 12 schools and a commute under 30 minutes downtown, and requests an intro call before any tour."},
+          {"targetField":"buyer_name","sourcePath":"buyer_name","defaultValue":"Maya Chen"},
+          {"targetField":"email","sourcePath":"email","defaultValue":"maya.chen@example.com"},
+          {"targetField":"desired","sourcePath":"desired","defaultValue":"3 bed / 2 bath, Westbrook, District 12 schools"}
         ]},
         "failure":{"advanceToStageId":"intake","persistMode":"shared_patch","fieldMappings":[]},
         "failureStageId":"intake","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       },
       {
-        "id":"draft_response","name":"Draft buyer response","fromStageId":"scored","toStageId":"drafted","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
+        "id":"draft_response","name":"Draft buyer response","fromStageId":"scored","toStageId":"drafted","trigger":"manual","workflowEndpointId":"2da65a71-65a0-45aa-a343-70638e48af88","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
         "success":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[
           {"targetField":"pipeline_stage","sourcePath":"pipeline_stage","defaultValue":"drafted"},
+          {"targetField":"budget_min_usd","sourcePath":"budget_min_usd","defaultValue":485000},
+          {"targetField":"budget_max_usd","sourcePath":"budget_max_usd","defaultValue":560000},
+          {"targetField":"financing","sourcePath":"financing","defaultValue":"Conventional pre-approval, 20% down"},
+          {"targetField":"down_payment_usd","sourcePath":"down_payment_usd","defaultValue":112000},
+          {"targetField":"monthly_housing_max_usd","sourcePath":"monthly_housing_max_usd","defaultValue":3200},
+          {"targetField":"fit_score_target","sourcePath":"fit_score_target","defaultValue":82},
+          {"targetField":"fit_band","sourcePath":"fit_band","defaultValue":"strong"},
           {"targetField":"next_questions","sourcePath":"next_questions","defaultValue":"[\"Are District 12 schools a firm requirement, or would you consider nearby school zones?\",\"Is the 30-minute downtown commute limit required at peak travel time?\",\"Will you complete the purchase with conventional financing, or are you considering an all-cash close?\"]"},
           {"targetField":"draft_response","sourcePath":"draft_response","defaultValue":"Draft — Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."}
         ]},
@@ -54,7 +65,7 @@
         "failureStageId":"scored","outputMode":"single","selectionMode":"all_in_stage","batchMode":"none"
       },
       {
-        "id":"propose_slots","name":"Propose intro call slots","fromStageId":"drafted","toStageId":"drafted","trigger":"manual","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
+        "id":"propose_slots","name":"Propose intro call slots","fromStageId":"drafted","toStageId":"drafted","trigger":"manual","workflowEndpointId":"2f37306b-7e2f-4c71-b4c6-d1fac3fbb60a","automation":{"autoFireOnEntry":false,"autoAdvanceWhenWorkflowless":false},
         "success":{"advanceToStageId":"drafted","persistMode":"shared_patch","fieldMappings":[
           {"targetField":"suggested_slots","sourcePath":"suggested_slots","defaultValue":"[\"2026-09-08 17:30 PT\",\"2026-09-09 18:00 PT\",\"2026-09-10 12:00 PT\"]"}
         ]},
