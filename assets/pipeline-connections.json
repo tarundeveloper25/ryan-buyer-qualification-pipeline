@@ -1,180 +1,325 @@
 {
   "schemaVersion": 2,
-  "commandId": "pl_2c40bbc4835c",
-  "trigger": "pl_2c40bbc4835c",
+  "resourceKey": "pipeline.ryan.buyer-qualification-pipeline",
+  "trigger": "pipeline.ryan.buyer-qualification-pipeline",
   "label": "Buyer Qualification Pipeline",
-  "updatedAt": 1787204768217,
+  "updatedAt": 1788350951867,
   "nodes": [
     {
-      "id": "pipeline:pl_2c40bbc4835c",
+      "id": "pipeline:pipeline.ryan.buyer-qualification-pipeline",
       "kind": "execution",
       "label": "Buyer Qualification Pipeline",
-      "description": "Pipeline state machine",
+      "description": "Approval-gated buyer qualification from intake through scored draft and unbooked call suggestions.",
       "meta": {
         "executionType": "pipeline",
-        "pipelineId": "pl_2c40bbc4835c",
-        "collectionId": "coll_a108fce9c816"
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
+        "listRef": {
+          "kind": "list",
+          "resourceKey": "list.ryan.buyer-qualification-cases"
+        }
       }
     },
     {
-      "id": "pipeline-stage:pl_2c40bbc4835c:intake",
+      "id": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:intake",
       "kind": "pipeline_stage",
       "label": "Intake",
-      "description": "Buyer inquiry captured and summarized after approved Gmail read.",
+      "description": "Buyer inquiry captured after the approved Gmail read or deterministic mock fallback.",
       "meta": {
-        "pipelineId": "pl_2c40bbc4835c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
         "stageId": "intake",
         "stageType": "initial",
         "color": "#64748b"
       }
     },
     {
-      "id": "pipeline-stage:pl_2c40bbc4835c:scored",
+      "id": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:scored",
       "kind": "pipeline_stage",
       "label": "Scored",
-      "description": "Financing and target range checked; readiness score recorded.",
+      "description": "Financing, budget, and comparable values checked; fit score recorded.",
       "meta": {
-        "pipelineId": "pl_2c40bbc4835c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
         "stageId": "scored",
         "stageType": "intermediate",
         "color": "#2563eb"
       }
     },
     {
-      "id": "pipeline-stage:pl_2c40bbc4835c:drafted",
+      "id": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
       "kind": "pipeline_stage",
       "label": "Drafted",
-      "description": "Unsent response draft with exactly three next questions prepared.",
+      "description": "Unsent response draft with exactly three required questions prepared.",
       "meta": {
-        "pipelineId": "pl_2c40bbc4835c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
         "stageId": "drafted",
         "stageType": "intermediate",
         "color": "#7c3aed"
       }
     },
     {
-      "id": "pipeline-stage:pl_2c40bbc4835c:slots_ready",
+      "id": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:slots_ready",
       "kind": "pipeline_stage",
       "label": "Slots Ready",
-      "description": "Three unbooked 30-minute intro-call suggestions prepared.",
+      "description": "Three unbooked intro-call suggestions prepared.",
       "meta": {
-        "pipelineId": "pl_2c40bbc4835c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
         "stageId": "slots_ready",
         "stageType": "terminal",
         "color": "#16a34a"
       }
     },
     {
-      "id": "collection:coll_a108fce9c816",
+      "id": "list:list.ryan.buyer-qualification-cases",
       "kind": "collection",
-      "label": "coll_a108fce9c816",
+      "label": "list.ryan.buyer-qualification-cases",
       "description": "Buyer Qualification Pipeline collection",
       "meta": {
-        "collectionId": "coll_a108fce9c816",
-        "pipelineId": "pl_2c40bbc4835c"
+        "listRef": {
+          "kind": "list",
+          "resourceKey": "list.ryan.buyer-qualification-cases"
+        },
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        }
       }
     },
     {
-      "id": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
+      "id": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:score_buyer",
       "kind": "pipeline_transition",
-      "label": "Score buyer readiness",
+      "label": "Score buyer fit",
       "description": "Pipeline transition",
       "meta": {
-        "pipelineId": "pl_2c40bbc4835c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
         "transitionId": "score_buyer",
         "trigger": "manual"
       }
     },
     {
-      "id": "pipeline-transition:pl_2c40bbc4835c:draft_response",
+      "id": "endpoint:1207947d-6f00-45b2-823c-e88ab22e741c",
+      "kind": "workflow_endpoint",
+      "label": "1207947d 6f00 45b2 823c E88ab22e741c",
+      "description": "Bound workflow",
+      "meta": {
+        "endpointId": "1207947d-6f00-45b2-823c-e88ab22e741c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
+        "transitionId": "score_buyer"
+      }
+    },
+    {
+      "id": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:draft_response",
       "kind": "pipeline_transition",
       "label": "Draft buyer response",
       "description": "Pipeline transition",
       "meta": {
-        "pipelineId": "pl_2c40bbc4835c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
         "transitionId": "draft_response",
         "trigger": "manual"
       }
     },
     {
-      "id": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
+      "id": "endpoint:2da65a71-65a0-45aa-a343-70638e48af88",
+      "kind": "workflow_endpoint",
+      "label": "2da65a71 65a0 45aa A343 70638e48af88",
+      "description": "Bound workflow",
+      "meta": {
+        "endpointId": "2da65a71-65a0-45aa-a343-70638e48af88",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
+        "transitionId": "draft_response"
+      }
+    },
+    {
+      "id": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:propose_slots",
+      "kind": "pipeline_transition",
+      "label": "Propose intro call slots",
+      "description": "Pipeline transition",
+      "meta": {
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
+        "transitionId": "propose_slots",
+        "trigger": "manual"
+      }
+    },
+    {
+      "id": "endpoint:2f37306b-7e2f-4c71-b4c6-d1fac3fbb60a",
+      "kind": "workflow_endpoint",
+      "label": "2f37306b 7e2f 4c71 B4c6 D1fac3fbb60a",
+      "description": "Bound workflow",
+      "meta": {
+        "endpointId": "2f37306b-7e2f-4c71-b4c6-d1fac3fbb60a",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
+        "transitionId": "propose_slots"
+      }
+    },
+    {
+      "id": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:prepare_slots",
       "kind": "pipeline_transition",
       "label": "Prepare intro call slots",
       "description": "Pipeline transition",
       "meta": {
-        "pipelineId": "pl_2c40bbc4835c",
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
         "transitionId": "prepare_slots",
+        "trigger": "manual"
+      }
+    },
+    {
+      "id": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:revise_slots",
+      "kind": "pipeline_transition",
+      "label": "Revise suggested slots",
+      "description": "Pipeline transition",
+      "meta": {
+        "pipelineRef": {
+          "kind": "pipeline",
+          "resourceKey": "pipeline.ryan.buyer-qualification-pipeline"
+        },
+        "transitionId": "revise_slots",
         "trigger": "manual"
       }
     }
   ],
   "edges": [
     {
-      "id": "edge:pipeline:pl_2c40bbc4835c:route:pipeline-stage:pl_2c40bbc4835c:intake:1",
-      "source": "pipeline:pl_2c40bbc4835c",
-      "target": "pipeline-stage:pl_2c40bbc4835c:intake",
+      "id": "edge:pipeline:pipeline.ryan.buyer-qualification-pipeline:route:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:intake:1",
+      "source": "pipeline:pipeline.ryan.buyer-qualification-pipeline",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:intake",
       "relation": "route",
       "label": "start"
     },
     {
-      "id": "edge:pipeline:pl_2c40bbc4835c:writes:collection:coll_a108fce9c816:2",
-      "source": "pipeline:pl_2c40bbc4835c",
-      "target": "collection:coll_a108fce9c816",
+      "id": "edge:pipeline:pipeline.ryan.buyer-qualification-pipeline:writes:list:list.ryan.buyer-qualification-cases:2",
+      "source": "pipeline:pipeline.ryan.buyer-qualification-pipeline",
+      "target": "list:list.ryan.buyer-qualification-cases",
       "relation": "writes"
     },
     {
-      "id": "edge:pipeline-stage:pl_2c40bbc4835c:intake:triggers:pipeline-transition:pl_2c40bbc4835c:score_buyer:3",
-      "source": "pipeline-stage:pl_2c40bbc4835c:intake",
-      "target": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
+      "id": "edge:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:intake:triggers:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:score_buyer:3",
+      "source": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:intake",
+      "target": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:score_buyer",
       "relation": "triggers"
     },
     {
-      "id": "edge:pipeline-transition:pl_2c40bbc4835c:score_buyer:success:pipeline-stage:pl_2c40bbc4835c:scored:4",
-      "source": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
-      "target": "pipeline-stage:pl_2c40bbc4835c:scored",
+      "id": "edge:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:score_buyer:executes:endpoint:1207947d-6f00-45b2-823c-e88ab22e741c:4",
+      "source": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:score_buyer",
+      "target": "endpoint:1207947d-6f00-45b2-823c-e88ab22e741c",
+      "relation": "executes"
+    },
+    {
+      "id": "edge:endpoint:1207947d-6f00-45b2-823c-e88ab22e741c:success:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:scored:5",
+      "source": "endpoint:1207947d-6f00-45b2-823c-e88ab22e741c",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:scored",
       "relation": "success"
     },
     {
-      "id": "edge:pipeline-transition:pl_2c40bbc4835c:score_buyer:failure:pipeline-stage:pl_2c40bbc4835c:intake:5",
-      "source": "pipeline-transition:pl_2c40bbc4835c:score_buyer",
-      "target": "pipeline-stage:pl_2c40bbc4835c:intake",
+      "id": "edge:endpoint:1207947d-6f00-45b2-823c-e88ab22e741c:failure:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:intake:6",
+      "source": "endpoint:1207947d-6f00-45b2-823c-e88ab22e741c",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:intake",
       "relation": "failure"
     },
     {
-      "id": "edge:pipeline-stage:pl_2c40bbc4835c:scored:triggers:pipeline-transition:pl_2c40bbc4835c:draft_response:6",
-      "source": "pipeline-stage:pl_2c40bbc4835c:scored",
-      "target": "pipeline-transition:pl_2c40bbc4835c:draft_response",
+      "id": "edge:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:scored:triggers:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:draft_response:7",
+      "source": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:scored",
+      "target": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:draft_response",
       "relation": "triggers"
     },
     {
-      "id": "edge:pipeline-transition:pl_2c40bbc4835c:draft_response:success:pipeline-stage:pl_2c40bbc4835c:drafted:7",
-      "source": "pipeline-transition:pl_2c40bbc4835c:draft_response",
-      "target": "pipeline-stage:pl_2c40bbc4835c:drafted",
+      "id": "edge:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:draft_response:executes:endpoint:2da65a71-65a0-45aa-a343-70638e48af88:8",
+      "source": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:draft_response",
+      "target": "endpoint:2da65a71-65a0-45aa-a343-70638e48af88",
+      "relation": "executes"
+    },
+    {
+      "id": "edge:endpoint:2da65a71-65a0-45aa-a343-70638e48af88:success:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted:9",
+      "source": "endpoint:2da65a71-65a0-45aa-a343-70638e48af88",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
       "relation": "success"
     },
     {
-      "id": "edge:pipeline-transition:pl_2c40bbc4835c:draft_response:failure:pipeline-stage:pl_2c40bbc4835c:scored:8",
-      "source": "pipeline-transition:pl_2c40bbc4835c:draft_response",
-      "target": "pipeline-stage:pl_2c40bbc4835c:scored",
+      "id": "edge:endpoint:2da65a71-65a0-45aa-a343-70638e48af88:failure:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:scored:10",
+      "source": "endpoint:2da65a71-65a0-45aa-a343-70638e48af88",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:scored",
       "relation": "failure"
     },
     {
-      "id": "edge:pipeline-stage:pl_2c40bbc4835c:drafted:triggers:pipeline-transition:pl_2c40bbc4835c:prepare_slots:9",
-      "source": "pipeline-stage:pl_2c40bbc4835c:drafted",
-      "target": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
+      "id": "edge:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted:triggers:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:propose_slots:11",
+      "source": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
+      "target": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:propose_slots",
       "relation": "triggers"
     },
     {
-      "id": "edge:pipeline-transition:pl_2c40bbc4835c:prepare_slots:success:pipeline-stage:pl_2c40bbc4835c:slots_ready:10",
-      "source": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
-      "target": "pipeline-stage:pl_2c40bbc4835c:slots_ready",
+      "id": "edge:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:propose_slots:executes:endpoint:2f37306b-7e2f-4c71-b4c6-d1fac3fbb60a:12",
+      "source": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:propose_slots",
+      "target": "endpoint:2f37306b-7e2f-4c71-b4c6-d1fac3fbb60a",
+      "relation": "executes"
+    },
+    {
+      "id": "edge:endpoint:2f37306b-7e2f-4c71-b4c6-d1fac3fbb60a:success:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted:13",
+      "source": "endpoint:2f37306b-7e2f-4c71-b4c6-d1fac3fbb60a",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
       "relation": "success"
     },
     {
-      "id": "edge:pipeline-transition:pl_2c40bbc4835c:prepare_slots:failure:pipeline-stage:pl_2c40bbc4835c:drafted:11",
-      "source": "pipeline-transition:pl_2c40bbc4835c:prepare_slots",
-      "target": "pipeline-stage:pl_2c40bbc4835c:drafted",
+      "id": "edge:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted:triggers:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:prepare_slots:14",
+      "source": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
+      "target": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:prepare_slots",
+      "relation": "triggers"
+    },
+    {
+      "id": "edge:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:prepare_slots:success:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:slots_ready:15",
+      "source": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:prepare_slots",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:slots_ready",
+      "relation": "success"
+    },
+    {
+      "id": "edge:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:prepare_slots:failure:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted:16",
+      "source": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:prepare_slots",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
       "relation": "failure"
+    },
+    {
+      "id": "edge:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted:triggers:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:revise_slots:17",
+      "source": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
+      "target": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:revise_slots",
+      "relation": "triggers"
+    },
+    {
+      "id": "edge:pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:revise_slots:success:pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted:18",
+      "source": "pipeline-transition:pipeline.ryan.buyer-qualification-pipeline:revise_slots",
+      "target": "pipeline-stage:pipeline.ryan.buyer-qualification-pipeline:drafted",
+      "relation": "success"
     }
   ],
   "relatedTodoIds": []
