@@ -3,7 +3,7 @@
   "resourceKey": "pipeline.ryan.buyer-qualification-pipeline",
   "trigger": "pipeline.ryan.buyer-qualification-pipeline",
   "label": "Buyer Qualification Pipeline",
-  "updatedAt": 1788587095941,
+  "updatedAt": 1788593457703,
   "nodes": [
     {
       "id": "pipeline:pipeline.ryan.buyer-qualification-pipeline",
