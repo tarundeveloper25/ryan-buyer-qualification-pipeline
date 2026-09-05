@@ -375,7 +375,7 @@
               "targetField": "draft_response",
               "sourcePath": "draft_response",
               "required": false,
-              "defaultValue": "Draft â€” Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."
+              "defaultValue": "Draft Ã¢â‚¬â€ Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."
             }
           ],
           "persistMode": "shared_patch"
@@ -444,7 +444,7 @@
             "targetField": "draft_response",
             "sourcePath": "draft_response",
             "required": false,
-            "defaultValue": "Draft â€” Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."
+            "defaultValue": "Draft Ã¢â‚¬â€ Hi Maya, your $560,000 conventional pre-approval aligns with the $529,000 Westbrook three-bedroom median and your current buyer fit score is 82 (strong). Before an intro call: 1) Are District 12 schools a firm requirement, or would you consider nearby school zones? 2) Is the 30-minute downtown commute limit required at peak travel time? 3) Will you complete the purchase with conventional financing, or are you considering an all-cash close? No email has been sent."
           }
         ],
         "outputMode": "single",
